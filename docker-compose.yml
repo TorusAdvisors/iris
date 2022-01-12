@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  iris:
+    image: torusadvisors/iris:latest
+    build:
+      dockerfile: Dockerfile
+      context: '.'
+    container_name: iris
+    tty: true
+    ports:
+      - "52773:52773"
+      - "1972:1972"
+    volumes:
+      - .:/app
+      - ${IRIS_DATA-./data:/irisapp:rw}
