@@ -24,6 +24,9 @@ ClassMethod Sql(data) As %Status
 ClassMethod ChunkInsert(gn, jsonString) As %Status
 {
     set sc = $$$OK
+
+    set set gn = "^"_gn_".1"
+
     set json = {}.%FromJSON(jsonString)
     set itr = json.%GetIterator()
     while itr.%GetNext(.key,.val) {
