@@ -21,4 +21,20 @@ ClassMethod Sql(data) As %Status
     return buffer.Read()
 }
 
+ClassMethod ChunkInsert(gn, jsonString) As %Status
+{
+    set sc = $$$OK
+    set json = {}.%FromJSON(jsonString)
+    set itr = json.%GetIterator()
+    while itr.%GetNext(.key,.val) {
+        set itrval=val.%GetIterator()
+        set lbvalue=""
+        while itrval.%GetNext(.lbkey,.lbval) {
+            set lbvalue=lbvalue_$lb(lbval)
+        }
+        set @gn@($i(@gn)) = lbvalue
+    }
+    return "ok"
+}
+
 }
